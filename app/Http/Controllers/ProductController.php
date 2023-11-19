@@ -3,70 +3,115 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Product\CityBike;
-use App\Models\Product\MountainBike;
-use App\Models\Product\RoadBike;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
+
 
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Write code on Method
+     *
+     * @return response()
      */
-    public function index()
+    public function cart(): response
     {
-        $cityBikes = CityBike::all();
-        $mountainBikes = MountainBike::all();
-        $roadBikes = RoadBike::all();
+        return response(view('cart'));
+    }
 
-        return view('products.index', compact('cityBikes', 'mountainBikes', 'roadBikes'));
+
+    public function addToCart($prodNo)
+    {
+        $product = Product::findOrFail($prodNo);
+
+        $cart = session()->get('cart', []);
+
+        if(isset($cart[$prodNo])) {
+            $cart[$prodNo]['quantity']++;
+        } else {
+            $cart[$prodNo] = [
+                "name" => $product->name,
+                "quantity" => 1,
+                "price" => $product->price,
+                "image" => $product->img
+            ];
+        }
+
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Write code on Method
+     *
+     * @return response()
      */
-    public function create()
+    public function update(Request $request)
     {
-        return view ();
+        if($request->prodNo && $request->quantity){
+            $cart = session()->get('cart');
+            $cart[$request->prodNo]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Cart updated successfully');
+        }
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Write code on Method
+     *
+     * @return response()
      */
-    public function store(Request $request)
+    public function remove(Request $request)
     {
-        //
+        if($request->prodNo) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->prodNo])) {
+                unset($cart[$request->prodNo]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Product removed successfully');
+        }
+    }
+    public function home(): View
+    {
+        $populars = Product::whereIn('prodNo', [1,2,3,5,9,11])->get();
+        return view('home', ['populars' => $populars]);
+    }
+    public function bikes(): View
+    {
+        $allBike = Product::where('category', 'bike')->get();
+        return view('products.bikes', ['bikes' => $allBike]);
+    }
+    public function filterBikes($category2): \Illuminate\Http\JsonResponse
+    {
+        $bikes = Product::where('category', 'bike')
+            ->where('category2', $category2)
+            ->get();
+
+        return response()->json($bikes);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
+    public function scooters(): View
     {
-        //
+        $scooters = Product::where('category', 'scooter')->get();
+        return view('products.scooters', ['scooters' => $scooters]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Product $product)
+    public function apparels(): View
     {
-        //
+        $apparels = Product::where('category', 'apparel')->get();
+        return view('products.apparels', ['apparels' => $apparels]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Product $product)
+    public function parts(): View
     {
-        //
+        $parts = Product::where('category', 'part')->get();
+        return view('products.parts', ['parts' => $parts]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Product $product)
+    public function test(): View
     {
-        //
+        return view('test');
     }
 }

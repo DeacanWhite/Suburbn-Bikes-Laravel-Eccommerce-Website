@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RoasterController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,22 +18,25 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+require __DIR__.'/auth.php';
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware('auth', 'verified')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-require __DIR__.'/auth.php';
 
 Route::get('/', [ProductController::class, 'home'])->name('home.index');
 
@@ -54,16 +59,9 @@ Route::get('/services', [ServiceController::class, 'showServiceForm'])->name('se
 Route::post('/service/book', [ServiceController::class, 'bookService'])->name('service.book');
 Route::get('/service/bookings', [ServiceController::class, 'viewBookings'])->name('service.bookings');
 
-Route::get('/roaster', [RoasterController::class, 'showRoasterForm'])->name('roaster.form');
-Route::get('/roaster/view', [RoasterController::class, 'viewRoaster'])->name('roaster.view');
-Route::post('/roaster/set', [RoasterController::class, 'setRoaster'])->name('roaster.set');
-Route::delete('/roaster/{id}', [RoasterController::class, 'destroy'])->name('roaster.destroy');
-
-
 Route::get('/test', [ProductController::class, 'test']);
 
-
 //auth
-//Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-//Route::post('login', [AuthController::class, 'login']);
-//Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');

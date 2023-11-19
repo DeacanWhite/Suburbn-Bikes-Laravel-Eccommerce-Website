@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+/**
+ * @method static \Illuminate\Database\Eloquent\Builder|User where(string $column, mixed $value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIn(string $column, mixed $values)
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -21,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -42,4 +46,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function isClient()
+    {
+        return $this->role === 'client';
+    }
+
+    /**
+     * Check if the user is a staff.
+     */
+    public function isStaff()
+    {
+        return $this->role === 'staff';
+    }
+
+    /**
+     * Check if the user is a manager.
+     */
+    public function isManager()
+    {
+        return $this->role === 'manager';
+    }
 }

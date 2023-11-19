@@ -1,10 +1,10 @@
 @extends('layout')
 @include('layouts.navbar')
-<title>Bookings</title>
+<title>Roaster</title>
 @section('content')
-    <div class="banner" style="width:100%; position: relative; height: 50vh; margin-top: -40px; background-image: url('https://github.com/Alex11520/img/blob/main/img/service_desktop.jpeg?raw=true'); background-size: cover; background-position: center; border-radius: 1rem;">
-        <div style="display: flex; height: 100%; align-items: center; justify-content: center;  padding-bottom: 5%;">
-            <p style="color: white; font-size: 15rem; font-weight: bold;">Bookings</p>
+    <div class="banner" style="width:100%; position: relative; height: 40vh; margin-top: -40px; background-image: url('https://github.com/Alex11520/img/blob/main/img/service_desktop.jpeg?raw=true'); background-size: cover; background-position: center; border-radius: 1rem;">
+        <div style="display: flex; height: 100%; align-items: center; justify-content: center;  ">
+            <p style="color: white; font-size: 20rem; font-weight: bold;">Service</p>
         </div>
     </div>
 
@@ -14,6 +14,7 @@
             margin-top: -140px;
             position: relative;
             z-index: 2;
+            border-radius: 3.125rem 3.125rem 0rem 0rem;
             background: #fff;
         }
 
@@ -127,38 +128,77 @@
             line-height: 1.575rem; /* 180% */
         }
     </style>
-    <main style="margin-bottom: 80px; height: 40vh;">
-        <!-- service.bookings.blade.php -->
+    <main style="margin-bottom: 80px; margin-top: 80px;">
+        <div style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
+            <h2 style="text-align: center; color: #333;">Set the roaster</h2>
+            <form action="{{ route('roaster.set') }}" method="post" style="display: flex; flex-direction: column; gap: 10px;">
+                @csrf <!-- 确保包含 CSRF 令牌 -->
+
+                <!-- 选择姓名 -->
+                <label for="user_id" style="margin-bottom: 5px;">Name:</label>
+                <select name="user_id" id="user_id" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    @foreach ($staffMembers as $staff)
+                        <option value="{{ $staff->id }}">{{ $staff->name }}</option>
+                    @endforeach
+                </select>
+
+                <!-- 选择职位 -->
+                <label for="position" style="margin-bottom: 5px;">Position:</label>
+                <select name="position" id="position" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <!-- 填写您希望提供选择的职位 -->
+                    <option value="sale">sale</option>
+                    <option value="admin">admin</option>
+                    <option value="workshop">workshop</option>
+                </select>
+
+                <!-- 选择天 -->
+                <label for="day" style="margin-bottom: 5px;">Day:</label>
+                <select name="day" id="day" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+
+                <!-- 提交按钮 -->
+                <input type="submit" value="Submit">
+            </form>
+
+        </div>
+
         <div style="max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-            <h1 style="color: #333; text-align: center;">Service Bookings</h1>
+            <h1 style="color: #333; text-align: center;">Staff Roaster</h1>
             <table style="width: 100%; border-collapse: collapse;">
                 <thead>
                 <tr style="background-color: #4b5563; color: white; text-align: left;">
-                    <th style="padding: 12px 15px;">Client Name</th>
-                    <th style="padding: 12px 15px;">Service Name</th>
-                    <th style="padding: 12px 15px;">Time</th>
+                    <th style="padding: 12px 15px;">Staff Name</th>
+                    <th style="padding: 12px 15px;">Position</th>
+                    <th style="padding: 12px 15px;">Day</th>
+                    <th style="padding: 12px 15px;">Delete</th>
+
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($bookings as $booking)
+                @foreach($roasters as $roaster)
                     <tr style="border-bottom: 1px solid #dddddd;">
-                        <td style="padding: 12px 15px;">{{ $booking->clientName }}</td>
-                        <td style="padding: 12px 15px;">{{ $booking->serviceName }}</td>
-                        <td style="padding: 12px 15px;">{{ $booking->time }}</td>
+                        <td style="padding: 12px 15px;">{{ $roaster->user->name }}</td>
+                        <td style="padding: 12px 15px;">{{ $roaster->position }}</td>
+                        <td style="padding: 12px 15px;">{{ $roaster->day }}</td>
+                        <td style="padding: 12px 15px;">
+                            <form action="{{ route('roaster.destroy', $roaster->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Are you sure?')" style="border: none; background-color: #ff0000; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
-
     </main>
-@include('layouts.footer')
+    @include('layouts.footer')
 @endsection
-@section('scripts')
-    <script>
-        function addToCart(prodNo) {
-            window.location.href = '/add-to-cart/' + prodNo;
-        }
-    </script>
-@endsection
-

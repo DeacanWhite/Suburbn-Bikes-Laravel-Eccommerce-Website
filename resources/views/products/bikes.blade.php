@@ -1,26 +1,19 @@
-{{--<h1>hello</h1>--}}
-{{--<p>Hello, {{ $bikes }}!</p>--}}
-
-@include('layout.head')
-{{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
-    <title>bikes</title>
-</head>
-
-<body>
-    @include('layout.nav')
-    <div class="banner" style="width=100%; position: relative; height: 50vh; margin-top: 75px; background-image: url('https://github.com/Alex11520/img/blob/main/img/bike-1.png?raw=true'); background-size: cover; background-position: center;">
+@extends('layout')
+@include('layouts.navbar')
+<title>Bikes</title>
+@section('content')
+    <div class="banner" style="width:100%; position: relative; height: 50vh; margin-top: -40px; background-image: url('https://github.com/Alex11520/img/blob/main/img/bike-1.png?raw=true'); background-size: cover; background-position: center; border-radius: 2rem;">
         <div style="display: flex; height: 100%; align-items: center; justify-content: flex-end; padding-right: 15%; padding-bottom: 5%;">
             <p style="color: white; font-size: 20rem; font-weight: bold;">Bike</p>
         </div>
     </div>
 
-{{--    css filter and product card--}}
+{{--        css filter and product card--}}
     <style>
         main {
             margin-top: -140px;
             position: relative;
             z-index: 2;
-            border-radius: 3.125rem 3.125rem 0rem 0rem;
             background: #fff;
         }
 
@@ -140,7 +133,7 @@
         }
     </style>
     <main style="margin-bottom: 80px;">
-{{--        category--}}
+{{--                category--}}
         <div class="trending-products">
             <div style="margin-top: 2.5rem; margin-bottom: 2.5rem; text-align: center;">
                 <h2 style="font-size: 5rem;  font-weight: 700; margin-bottom: 2.5rem; color: #39393a ">Category</h2>
@@ -152,7 +145,7 @@
             </div>
         </div>
 
-{{--        product container--}}
+{{--                product container--}}
         <div class="trending-products-container" id="productContainer">
             @foreach ($bikes as $bike)
 
@@ -166,7 +159,7 @@
                             <span class="product-price">A${{ number_format($bike->price, 2) }}</span>
                         </div>
                         <div class="product-buttons">
-                            <button data-id="{{ $bike->prodNo }}" data-type="bike">Add to cart</button>
+                            <button data-id="{{ $bike->prodNo }}" data-type="bike" onclick="addToCart({{ $bike->prodNo }})" >Add to cart</button>
                             @if ($bike->size)
                                 <select name="size" id="size">
                                     <option value="{{ $bike->size }}">{{ $bike->size }}</option>
@@ -184,33 +177,22 @@
         </div>
 
     </main>
-    <footer style="width: 100%; height: 168px; background-color: #39393A; color: white; position: relative; bottom: 0; font-family: 'Inter', serif; padding-top: 40px;">
-        <div style="position: absolute; width: 192px; height: 120px; top: 18px; left: 160px;">
-            <!-- Brand Icon -->
-            <p style="font-weight: 700; font-size: 41px; line-height: 40.5px; color: white;">
-                SUB<br /><span style="color: #B2D3A8;">URBN</span>
-            </p>
-        </div>
-        <div style="position: absolute; top: 68px; right: 160px; text-align: right;">
-            <!-- Contact Us -->
-            <p style="font-weight: 400; font-size: 16px; line-height: 20px; color: white; white-space: nowrap;">
-                Contact Us : suburbn@gmail.com
-            </p>
-        </div>
-        <div style="position: absolute; top: 68px; right: 416px; text-align: right;">
-            <!-- Manager Login -->
-            <p style="font-weight: 400; font-size: 16px; line-height: 20px; color: white; margin-right: 20px;">
-                Manager Login
-            </p>
-        </div>
-        <div style="position: absolute; top: 68px; right: 556px; text-align: right;">
-            <!-- Staff Login -->
-            <p style="font-weight: 400; font-size: 16px; line-height: 20px; color: white;">
-                Staff Login
-            </p>
-        </div>
-    </footer>
+    @include('layouts.footer')
+
+@endsection
+@section('scripts')
     <script>
+        document.getElementById('productContainer').addEventListener('click', function(event) {
+            if (event.target.matches('button[data-type="bike"]')) {
+                const prodNo = event.target.getAttribute('data-id');
+                addToCart(prodNo);
+            }
+        });
+
+        function addToCart(prodNo) {
+            window.location.href = '/add-to-cart/' + prodNo;
+        }
+
         function filterBikes(category2) {
             fetch(`/filter-bikes/${category2}`)
                 .then(response => response.json())
@@ -249,8 +231,4 @@
 
 
     </script>
-
-</body>
-</html>
-
-
+@endsection

@@ -8,6 +8,503 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@200&display=swap" rel="stylesheet">
     <link href="{{ asset('css/home-style.css') }}" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            color: #ffffff;
+            width: 100%;
+            transition: all 0.8s;
+        }
+
+        .navbar a {
+            color: white;
+        }
+
+        .navbar-scrolled {
+            background-color: #ffffff;
+            border-bottom: 1px solid #dfdfdf;
+        }
+
+        .navbar-scrolled a {
+            color: #000000;
+        }
+
+        .nav-content {
+            height: 75px;
+            width: 100%;
+            max-width: 1454px;
+            position: relative;
+            padding: 0px 40px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-family: Inter;
+            font-size: 1.375rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 0.1375rem;
+        }
+
+        .navbar-scrolled .logo {
+            color: #39393a;
+        }
+
+        .urbn {
+            color: #b2d3a8;
+        }
+
+        .nav-links ul {
+            display: inline-flex;
+            flex-direction: row;
+            gap: 30px;
+            font-size: 0.875rem;
+            color: #fff;
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .nav-icons ul {
+            display: inline-flex;
+            flex-direction: row;
+            gap: 30px;
+            font-size: 0.875rem;
+            color: #fff;
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 600;
+            align-items: center;
+        }
+
+        .nav-icons,
+        .location,
+        .profile {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-icons {
+            stroke: #fff;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+        }
+
+        .nav-icons path {
+            stroke: white !important;
+        }
+
+        .navbar-scrolled .nav-icons path {
+            stroke: black !important;
+            fill: black !important;
+        }
+
+        .side-bar {
+            display: none;
+        }
+
+        .openbtn {
+            display: none;
+        }
+
+        .side-bar {
+            height: 45vh;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: #ffffff;
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 60px;
+            border-radius: 0 0 0 10px;
+            box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
+            font-family: Inter;
+
+        }
+
+        .side-bar li a {
+            text-decoration: none;
+            font-size: 14px;
+            color: #000000;
+            display: block;
+            transition: 0.3s;
+            padding: 20px 0;
+            margin: 0 20px;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .side-bar a:hover {
+            color: #f1f1f1;
+        }
+
+        .side-bar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 20px;
+            margin-left: 50px;
+            color: #000;
+        }
+
+        @media screen and (max-width: 900px) {
+            .nav-links ul {
+                display: none;
+            }
+
+            .nav-links ul li a {
+                color: #000;
+            }
+
+            .nav-icons li:not(span) {
+                display: none;
+            }
+
+            .side-bar {
+                display: block;
+            }
+
+            .openbtn {
+                display: block;
+            }
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-flex;
+        }
+
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            background-color: #ffff;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+
+        }
+
+        .dropdown-content a{
+            color: #2d3748;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+        .hero {
+            background: linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.3) 0%,
+                rgba(0, 0, 0, 0.3) 100%
+            ),
+            url(https://cdn.discordapp.com/attachments/909028528270508095/1168763832596959324/daniel-salcius-RRcYcdGY630-unsplash.jpg?ex=6552f324&is=65407e24&hm=46c5a57d934426f36e809cc835788780f9ca0a2f04cef930d4c15bb699c21274&),
+            rgb(156, 156, 156) -155.111px -248px / 118.97% 119.451% no-repeat;
+            color: #ffffff;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            opacity: 0.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text-container {
+            max-width: 1454px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 250px;
+            padding-bottom: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Inter;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            margin-top: 4rem;
+            width: 26.625rem;
+        }
+        .hero h1 {
+            font-size: 9.375rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 8.75rem; /* 93.333% */
+        }
+
+        .hero button {
+            border-radius: 1.25rem;
+            background: #b2d3a8;
+            display: inline-flex;
+            padding: 0.625rem 1.625rem;
+            justify-content: center;
+            align-items: center;
+            gap: 0.625rem;
+            margin-top: 1.31rem;
+            border: none;
+            color: #fff;
+            text-align: center;
+            font-family: Inter;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            cursor: pointer;
+        }
+
+        main {
+            border-radius: 2rem 2rem;
+            margin-top: -140px;
+            position: relative;
+            z-index: 2;
+            border-radius: 3.125rem 3.125rem 0rem 0rem;
+            background: #fff;
+        }
+
+        .trending-products {
+            color: #000;
+            text-align: center;
+            font-size: 1.75rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            padding-top: 7.06rem;
+        }
+
+        .category-container {
+            max-width: 60rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 2.5rem;
+            margin-top: 3.31rem;
+        }
+
+        .category {
+            width: 10rem;
+            height: 10rem;
+            font-size: 1rem;
+            filter: grayscale(100%);
+        }
+
+        @media screen and (max-width: 1000px) {
+            .category {
+                width: 7.5rem;
+                height: 7.5rem;
+            }
+
+            .category-container {
+                gap: 1.5rem;
+            }
+        }
+
+        .trending-products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 3.31rem;
+        }
+
+        .product-image {
+            display: flex; /* Use flexbox to center the image */
+            justify-content: center; /* Center image horizontally */
+            align-items: center; /* Center image vertically */
+            overflow: hidden; /* Prevents the image from spilling out of the container */
+            background-color: #eceee8;
+            border-radius: 0.625rem 0.625rem 0 0;
+        }
+
+        .product-image img {
+            max-width: 100%; /* Limits the maximum width to prevent the image from exceeding the card */
+            max-height: 325px; /* Limits the maximum height to ensure consistency */
+            width: auto; /* Allows the image width to adjust automatically */
+            height: auto; /* Allows the image height to adjust automatically */
+            object-fit: cover; /* Ensures the image covers the container without distorting the aspect ratio */
+            background-color: #eceee8;
+            border-radius: 0.625rem 0.625rem 0 0;
+        }
+
+        .product-card {
+            width: 29rem;
+            height: auto; /* Allows the card height to adjust based on content while maintaining a consistent image height */
+            min-height: 26.1875rem; /* Sets a minimum height to ensure the card has a basic height even without an image */
+            background-color: #fff;
+            box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 0.625rem;
+            font-family: Inter, serif;
+            overflow: hidden; /* Prevents the image from spilling out of the card */
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding-left: 0.81rem;
+            padding-right: 0.81rem;
+        }
+
+        .product-name-price {
+            font-size: 1rem;
+            line-height: 1.575rem; /* 157.5% */
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.31rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-name {
+            font-weight: 400;
+        }
+
+        .product-price {
+            font-weight: 700;
+        }
+
+        .product-buttons {
+            display: flex;
+            font-family: Inter;
+        }
+
+        .product-buttons button {
+            display: flex;
+            padding: 0.3125rem 0.625rem;
+            justify-content: center;
+            align-items: center;
+            gap: 0.3125rem;
+            border-radius: 0.3125rem;
+            border: none;
+            background: #b2d3a8;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1.575rem; /* 180% */
+        }
+
+        .product-buttons button:hover {
+            background: #80a572;
+        }
+
+        .product-buttons select {
+            border-radius: 0.3125rem;
+            border: 1px solid #dfdfdf;
+            background: #fff;
+            color: #929292;
+            margin-left: 0.5rem;
+            padding-left: 0.4rem;
+            padding-right: 0.3rem;
+
+            font-size: 0.875rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1.575rem; /* 180% */
+        }
+
+        .mid-banner img {
+            height: 50.625rem;
+            width: 100%;
+            margin-top: 5.31rem;
+            object-fit: cover;
+            filter: brightness(50%);
+        }
+
+        .mid-banner {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url(https://cdn.discordapp.com/attachments/909028528270508095/1168763856672272464/2e82f3bedfddb2eaaaa5903ae449329b.jpeg?ex=6552f32a&is=65407e2a&hm=7e320e28aed884fb6d4b91b4b146e776e65cb34e392d93b8254de7dc3538b794&);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            position: relative;
+            height: 65vh;
+            margin-top: 7.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mid-banner-text {
+            position: relative;
+            font-family: Inter;
+            font-size: 5.625rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 6.1875rem; /* 110% */
+            color: #ffffff;
+            text-align: center;
+            max-width: 95rem;
+        }
+
+        .mid-banner-text button {
+            border-radius: 1.25rem;
+            background: #b2d3a8;
+            display: inline-flex;
+            padding: 0.625rem 1.625rem;
+            justify-content: center;
+            align-items: center;
+            gap: 0.625rem;
+            margin-top: 1.31rem;
+            border: none;
+            color: #fff;
+            text-align: center;
+            font-family: Inter;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            cursor: pointer;
+        }
+
+        .footer {
+            width: 100%;
+            height: 19.6875rem;
+            margin-top: 5.31rem;
+            background-color: #39393a;
+            color: #fff;
+        }
+
+        .footer-container {
+            padding-top: 3.71rem;
+        }
+
+        .logo-footer {
+            font-family: Inter;
+            font-size: 2.5625rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 2.53125rem; /* 98.78% */
+        }
+    </style>
 
 
     <script defer src="script.js"></script>
@@ -24,11 +521,11 @@
         </div>
         <div id="nav-links" class="nav-links">
             <ul>
-                <li><a href="#">BIKES</a></li>
-                <li><a href="#">SCOOTERS</a></li>
-                <li><a href="#">APPAREL</a></li>
-                <li><a href="#">PARTS</a></li>
-                <li><a href="#">SERVICES</a></li>
+                <li><a href="{{ url('/bikes') }}">BIKES</a></li>
+                <li><a href="{{ url('/scooters') }}">SCOOTERS</a></li>
+                <li><a href="{{ url('/apparels') }}">APPAREL</a></li>
+                <li><a href="{{ url('/parts') }}">PARTS</a></li>
+                <li><a href="{{ url('/services') }}">SERVICES</a></li>
             </ul>
         </div>
         <div id="side-bar" class="side-bar">
@@ -39,11 +536,11 @@
                         <path d="M6 6.05L18 18.05" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </a>
-                <li><a href="#"></a></li>
-                <li><a href="#">SCOOTERS</a></li>
-                <li><a href="#">APPAREL</a></li>
-                <li><a href="#">PARTS</a></li>
-                <li><a href="#">SERVICES</a></li>
+                <li><a href="{{ url('/allbikes') }}">BIKES</a></li>
+                <li><a href="{{ url('/scooters') }}">SCOOTERS</a></li>
+                <li><a href="{{ url('/apparels') }}">APPAREL</a></li>
+                <li><a href="{{ url('/parts') }}">PARTS</a></li>
+                <li><a href="{{ url('/services') }}">SERVICES</a></li>
                 <li><a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                             <path d="M11 19.8929C15.4183 19.8929 19 16.3112 19 11.8929C19 7.47457 15.4183 3.89285 11 3.89285C6.58172 3.89285 3 7.47457 3 11.8929C3 16.3112 6.58172 19.8929 11 19.8929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -74,7 +571,7 @@
                             <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
                     </a></li>
-                <li><a href="#">
+                <li><a href="{{ url('/cart') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                             <g clip-path="url(#clip0_394_105)">
                                 <path d="M9 22.8929C9.55228 22.8929 10 22.4452 10 21.8929C10 21.3406 9.55228 20.8929 9 20.8929C8.44772 20.8929 8 21.3406 8 21.8929C8 22.4452 8.44772 22.8929 9 22.8929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -133,85 +630,35 @@
             </div>
         </div>
     </div>
-    <div class="trending-products-container">
-        @foreach ($citybikes->take(4) as $citybike)
+
+    <div class="trending-products-container" id="productContainer">
+        @foreach ($populars as $popular)
+
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{{ $citybike->CB_image}}" alt="product-image">
+                    <img src="{{ $popular->img }}" alt="product-image">
                 </div>
                 <div class="product-info">
                     <div class="product-name-price">
-                        <span class="product-name">{{ $citybike->CB_name }}</span>
-                        <span class="product-price">A${{ $citybike->CB_price }}</span>
+                        <span class="product-name">{{ $popular->name }}</span>
+                        <span class="product-price">A${{ number_format($popular->price, 2) }}</span>
                     </div>
                     <div class="product-buttons">
-                        <button data-id="{{ $citybike->CB_ProdNo }}" data-type="{{ $citybike->getTable() }}">Add to cart</button>
-                        <select name="size" id="size">
-                            @foreach (explode(',', $citybike->CB_size) as $size)
-                                <option value="{{ $size }}">{{ ucfirst($size) }}</option>
-                            @endforeach
-                        </select>
-                        <select name="colour" id="colour">
-                            @foreach (explode(',', $citybike->CB_colour) as $colour)
-                                <option value="{{ $colour }}">{{ ucfirst($colour) }}</option>
-                            @endforeach
-                        </select>
+                        <button data-id="{{ $popular->prodNo }}" data-type="bike">Add to cart</button>
+                        @if ($popular->size)
+                            <select name="size" id="size">
+                                <option value="{{ $popular->size }}">{{ $popular->size }}</option>
+                            </select>
+                        @endif
+                        @if ($popular->color)
+                            <select name="colour" id="colour">
+                                <option value="{{ $popular->color }}">{{ ucfirst($popular->color) }}</option>
+                            </select>
+                        @endif
                     </div>
                 </div>
             </div>
         @endforeach
-            @foreach ($roadbikes->take(1) as $roadbike)
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ $roadbike->RB_image}}" alt="product-image">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name-price">
-                            <span class="product-name">{{ $roadbike->RB_name }}</span>
-                            <span class="product-price">A${{ $roadbike->RB_price }}</span>
-                        </div>
-                        <div class="product-buttons">
-                            <button data-id="{{ $roadbike->RB_ProdNo }}" data-type="{{ $roadbike->getTable() }}">Add to cart</button>
-                            <select name="size" id="size">
-                                @foreach (explode(',', $roadbike->RB_size) as $size)
-                                    <option value="{{ $size }}">{{ ucfirst($size) }}</option>
-                                @endforeach
-                            </select>
-                            <select name="colour" id="colour">
-                                @foreach (explode(',', $roadbike->RB_colour) as $colour)
-                                    <option value="{{ $colour }}">{{ ucfirst($colour) }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-            @foreach ($mountainbike->take(1) as $mountainbike)
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ $mountainbike->MB_image}}" alt="product-image">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name-price">
-                            <span class="product-name">{{ $mountainbike->MB_name }}</span>
-                            <span class="product-price">A${{ $mountainbike->MB_price }}</span>
-                        </div>
-                        <div class="product-buttons">
-                            <button data-id="{{ $mountainbike->MB_ProdNo }}" data-type="{{ $mountainbike->getTable() }}">Add to cart</button>
-                            <select name="size" id="size">
-                                @foreach (explode(',', $mountainbike->MB_size) as $size)
-                                    <option value="{{ $size }}">{{ ucfirst($size) }}</option>
-                                @endforeach
-                            </select>
-                            <select name="colour" id="colour">
-                                @foreach (explode(',', $mountainbike->MB_colour) as $colour)
-                                    <option value="{{ $colour }}">{{ ucfirst($colour) }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
     </div>
     <div class="mid-banner">
         <div class="mid-banner-text">
@@ -220,21 +667,7 @@
         </div>
     </div>
 </main>
-<div class="footer">
-    <div class="footer-container">
-        <div class="logo-links"></div>
-        <div class="logo-footer">
-            <h3>SUB</h3>
-            <h3 class="urbn">URBN</h3>
-        </div>
-        <div class="links">
-            <div class="col-1"></div>
-            <div class="col-1"></div>
-            <div class="col-1"></div>
-        </div>
-        <div class="socials"></div>
-    </div>
-</div>
+@include('layouts.footer')
 <script>
     function openNav() {
         document.getElementById("side-bar").style.width = "250px";
@@ -245,488 +678,6 @@
     }
 </script>
 </body>
-<style>
-    * {
-        padding: 0;
-        margin: 0;
-        text-decoration: none;
-        list-style: none;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: "Inter", sans-serif;
-        font-family: "Montserrat", sans-serif;
-    }
-
-    .navbar {
-        position: fixed;
-        top: 0;
-        z-index: 999;
-        color: #ffffff;
-        width: 100%;
-        transition: all 0.8s;
-    }
-
-    .navbar a {
-        color: white;
-    }
-
-    .navbar-scrolled {
-        background-color: #ffffff;
-        border-bottom: 1px solid #dfdfdf;
-    }
-
-    .navbar-scrolled a {
-        color: #000000;
-    }
-
-    .nav-content {
-        height: 75px;
-        width: 100%;
-        max-width: 1454px;
-        position: relative;
-        padding: 0px 40px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .logo {
-        color: #ffffff;
-        font-family: Inter;
-        font-size: 1.375rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        letter-spacing: 0.1375rem;
-    }
-
-    .navbar-scrolled .logo {
-        color: #39393a;
-    }
-
-    .urbn {
-        color: #b2d3a8;
-    }
-
-    .nav-links ul {
-        display: inline-flex;
-        flex-direction: row;
-        gap: 30px;
-        font-size: 0.875rem;
-        color: #fff;
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 600;
-    }
-
-    .nav-icons ul {
-        display: inline-flex;
-        flex-direction: row;
-        gap: 30px;
-        font-size: 0.875rem;
-        color: #fff;
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 600;
-        align-items: center;
-    }
-
-    .nav-icons,
-    .location,
-    .profile {
-        display: flex;
-        gap: 30px;
-    }
-
-    .nav-icons {
-        stroke: #fff;
-        stroke-width: 1.5;
-        stroke-linecap: round;
-    }
-
-    .nav-icons path {
-        stroke: white !important;
-    }
-
-    .navbar-scrolled .nav-icons path {
-        stroke: black !important;
-        fill: black !important;
-    }
-
-    .side-bar {
-        display: none;
-    }
-
-    .openbtn {
-        display: none;
-    }
-
-    .side-bar {
-        height: 45vh;
-        width: 0;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        right: 0;
-        background-color: #ffffff;
-        overflow-x: hidden;
-        transition: 0.3s;
-        padding-top: 60px;
-        border-radius: 0 0 0 10px;
-        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
-        font-family: Inter;
-
-    }
-
-    .side-bar li a {
-        text-decoration: none;
-        font-size: 14px;
-        color: #000000;
-        display: block;
-        transition: 0.3s;
-        padding: 20px 0;
-        margin: 0 20px;
-        border-top: 1px solid #e5e5e5;
-    }
-
-    .side-bar a:hover {
-        color: #f1f1f1;
-    }
-
-    .side-bar .closebtn {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 20px;
-        margin-left: 50px;
-        color: #000;
-    }
-
-    @media screen and (max-width: 900px) {
-        .nav-links ul {
-            display: none;
-        }
-
-        .nav-links ul li a {
-            color: #000;
-        }
-
-        .nav-icons li:not(span) {
-            display: none;
-        }
-
-        .side-bar {
-            display: block;
-        }
-
-        .openbtn {
-            display: block;
-        }
-    }
-
-    .dropdown {
-        position: relative;
-        display: inline-flex;
-    }
-
-    .dropdown-content {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        background-color: #ffff;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-
-    }
-
-    .dropdown-content a{
-        color: #2d3748;
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-
-
-    .hero {
-        background: linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.3) 0%,
-            rgba(0, 0, 0, 0.3) 100%
-        ),
-        url(https://cdn.discordapp.com/attachments/909028528270508095/1168763832596959324/daniel-salcius-RRcYcdGY630-unsplash.jpg?ex=6552f324&is=65407e24&hm=46c5a57d934426f36e809cc835788780f9ca0a2f04cef930d4c15bb699c21274&),
-        rgb(156, 156, 156) -155.111px -248px / 118.97% 119.451% no-repeat;
-        color: #ffffff;
-        background-size: cover;
-        background-position: center;
-        height: 100vh;
-        opacity: 0.8;
-        position: relative;
-        z-index: 1;
-    }
-
-    .hero-text-container {
-        max-width: 1454px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        padding-top: 250px;
-        padding-bottom: 400px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-family: Inter;
-        color: #fff;
-        text-align: center;
-    }
-
-    .hero p {
-        font-size: 1.5rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        margin-top: 4rem;
-        width: 26.625rem;
-    }
-    .hero h1 {
-        font-size: 9.375rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 8.75rem; /* 93.333% */
-    }
-
-    .hero button {
-        border-radius: 1.25rem;
-        background: #b2d3a8;
-        display: inline-flex;
-        padding: 0.625rem 1.625rem;
-        justify-content: center;
-        align-items: center;
-        gap: 0.625rem;
-        margin-top: 1.31rem;
-        border: none;
-        color: #fff;
-        text-align: center;
-        font-family: Inter;
-        font-size: 1rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        cursor: pointer;
-    }
-
-    main {
-        border-radius: 2rem 2rem;
-        margin-top: -140px;
-        position: relative;
-        z-index: 2;
-        border-radius: 3.125rem 3.125rem 0rem 0rem;
-        background: #fff;
-    }
-
-    .trending-products {
-        color: #000;
-        text-align: center;
-        font-size: 1.75rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        padding-top: 7.06rem;
-    }
-
-    .category-container {
-        max-width: 60rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 2.5rem;
-        margin-top: 3.31rem;
-    }
-
-    .category {
-        width: 10rem;
-        height: 10rem;
-        font-size: 1rem;
-        filter: grayscale(100%);
-    }
-
-    @media screen and (max-width: 1000px) {
-        .category {
-            width: 7.5rem;
-            height: 7.5rem;
-        }
-
-        .category-container {
-            gap: 1.5rem;
-        }
-    }
-
-    .trending-products-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 2.5rem;
-        margin-top: 3.31rem;
-    }
-
-    .product-card {
-        width: 29rem;
-        height: 26.1875rem;
-        background-color: #fff;
-        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
-        border-radius: 0.625rem;
-        font-family: Inter;
-    }
-
-    .product-image img {
-        width: 100%;
-        background-color: #eceee8;
-        border-radius: 0.625rem 0.625rem 0 0;
-    }
-
-    .product-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        padding-left: 0.81rem;
-        padding-right: 0.81rem;
-    }
-
-    .product-name-price {
-        font-size: 1rem;
-        line-height: 1.575rem; /* 157.5% */
-        display: flex;
-        justify-content: space-between;
-        margin-top: 0.31rem;
-        margin-bottom: 1rem;
-    }
-
-    .product-name {
-        font-weight: 400;
-    }
-
-    .product-price {
-        font-weight: 700;
-    }
-
-    .product-buttons {
-        display: flex;
-        font-family: Inter;
-    }
-
-    .product-buttons button {
-        display: flex;
-        padding: 0.3125rem 0.625rem;
-        justify-content: center;
-        align-items: center;
-        gap: 0.3125rem;
-        border-radius: 0.3125rem;
-        border: none;
-        background: #b2d3a8;
-        color: #fff;
-        cursor: pointer;
-        font-size: 0.875rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 1.575rem; /* 180% */
-    }
-
-    .product-buttons button:hover {
-        background: #80a572;
-    }
-
-    .product-buttons select {
-        border-radius: 0.3125rem;
-        border: 1px solid #dfdfdf;
-        background: #fff;
-        color: #929292;
-        margin-left: 0.5rem;
-        padding-left: 0.4rem;
-        padding-right: 0.3rem;
-
-        font-size: 0.875rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 1.575rem; /* 180% */
-    }
-
-    .mid-banner img {
-        height: 50.625rem;
-        width: 100%;
-        margin-top: 5.31rem;
-        object-fit: cover;
-        filter: brightness(50%);
-    }
-
-    .mid-banner {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url(https://cdn.discordapp.com/attachments/909028528270508095/1168763856672272464/2e82f3bedfddb2eaaaa5903ae449329b.jpeg?ex=6552f32a&is=65407e2a&hm=7e320e28aed884fb6d4b91b4b146e776e65cb34e392d93b8254de7dc3538b794&);
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
-        position: relative;
-        height: 65vh;
-        margin-top: 7.5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .mid-banner-text {
-        position: relative;
-        font-family: Inter;
-        font-size: 5.625rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 6.1875rem; /* 110% */
-        color: #ffffff;
-        text-align: center;
-        max-width: 95rem;
-    }
-
-    .mid-banner-text button {
-        border-radius: 1.25rem;
-        background: #b2d3a8;
-        display: inline-flex;
-        padding: 0.625rem 1.625rem;
-        justify-content: center;
-        align-items: center;
-        gap: 0.625rem;
-        margin-top: 1.31rem;
-        border: none;
-        color: #fff;
-        text-align: center;
-        font-family: Inter;
-        font-size: 1rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        cursor: pointer;
-    }
-
-    .footer {
-        width: 100%;
-        height: 19.6875rem;
-        margin-top: 5.31rem;
-        background-color: #39393a;
-        color: #fff;
-    }
-
-    .footer-container {
-        padding-top: 3.71rem;
-    }
-
-    .logo-footer {
-        font-family: Inter;
-        font-size: 2.5625rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 2.53125rem; /* 98.78% */
-    }
-</style>
 
 <script>
     //navbar scroll animation (transparent to solid)

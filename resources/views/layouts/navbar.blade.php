@@ -10,11 +10,11 @@
         <!-- Desktop Page Links -->
         <div id="nav-links" class="nav-links">
             <ul>
-                <li><a href="#">BIKES</a></li>
-                <li><a href="#">SCOOTERS</a></li>
-                <li><a href="#">APPAREL</a></li>
-                <li><a href="#">PARTS</a></li>
-                <li><a href="#">SERVICES</a></li>
+                <li><a href="{{ url('/bikes') }}">BIKES</a></li>
+                <li><a href="{{ url('/scooters') }}">SCOOTERS</a></li>
+                <li><a href="{{ url('/apparels') }}">APPAREL</a></li>
+                <li><a href="{{ url('/parts') }}">PARTS</a></li>
+                <li><a href="{{ url('/services') }}">SERVICES</a></li>
             </ul>
         </div>
 
@@ -29,14 +29,14 @@
                     </svg>
                 </a>
                 <!-- Page Links -->
-                <li><a href="#">BIKES</a></li>
-                <li><a href="#">SCOOTERS</a></li>
-                <li><a href="#">APPAREL</a></li>
-                <li><a href="#">PARTS</a></li>
-                <li><a href="#">SERVICES</a></li>
+                <li><a href="{{ url('/bikes') }}">BIKES</a></li>
+                <li><a href="{{ url('/scooters') }}">SCOOTERS</a></li>
+                <li><a href="{{ url('/apparels') }}">APPAREL</a></li>
+                <li><a href="{{ url('/parts') }}">PARTS</a></li>
+                <li><a href="{{ url('/services') }}">SERVICES</a></li>
                 <li><a href="#">LOCATIONS</a></li>
-                <li><a href="#">PROFILE</a></li>
-                <li><a href="#">VIEW CART</a></li>
+                <li><a href="{{ url('/dashboard') }}">PROFILE</a></li>
+                <li><a href="{{ url('/cart') }}">VIEW CART</a></li>
             </ul>
         </div>
         <!-- Desktop Nav Icons -->
@@ -57,7 +57,7 @@
                         </svg>
                     </a></li>
                 <!-- Cart Icon -->
-                <li><a href="#">
+                <li><a href="{{ url('/cart') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                             <g clip-path="url(#clip0_394_105)">
                                 <path d="M9 22.8929C9.55228 22.8929 10 22.4452 10 21.8929C10 21.3406 9.55228 20.8929 9 20.8929C8.44772 20.8929 8 21.3406 8 21.8929C8 22.4452 8.44772 22.8929 9 22.8929Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -160,6 +160,7 @@
         font-family: Inter;
         font-style: normal;
         font-weight: 600;
+        padding-top: 17px;
     }
 
     .nav-icons ul {
@@ -172,6 +173,7 @@
         font-style: normal;
         font-weight: 600;
         align-items: center;
+        padding-top: 25px;
     }
 
     .nav-icons,

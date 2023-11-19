@@ -2,11 +2,6 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <div class="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 mb-6 ">
-        <h1 class="text-4xl font-bold mb-4">Login</h1>
-        <p>Please enter your e-mail and password</p>
-    </div>
-
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -33,7 +28,7 @@
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
 
@@ -44,14 +39,9 @@
                 </a>
             @endif
 
-            <x-secondary-button class="ml-3">
-                <a href="{{ route('register') }}">register</a>
-            </x-secondary-button>
-
-            <x-primary-button class="ml-3 bg-[#B2D3A8] ">
+            <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
-
         </div>
     </form>
 </x-guest-layout>
