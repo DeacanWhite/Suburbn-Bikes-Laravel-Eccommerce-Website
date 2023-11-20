@@ -52,16 +52,22 @@ Route::get('/parts', [ProductController::class, 'parts']);
 
 Route::get('/services', [ServiceController::class, 'showServiceForm'])->name('service.form');
 Route::post('/service/book', [ServiceController::class, 'bookService'])->name('service.book');
-Route::get('/service/bookings', [ServiceController::class, 'viewBookings'])->name('service.bookings');
 
-Route::get('/roaster', [RoasterController::class, 'showRoasterForm'])->name('roaster.form');
-Route::get('/roaster/view', [RoasterController::class, 'viewRoaster'])->name('roaster.view');
-Route::post('/roaster/set', [RoasterController::class, 'setRoaster'])->name('roaster.set');
-Route::delete('/roaster/{id}', [RoasterController::class, 'destroy'])->name('roaster.destroy');
+Route::middleware(['role:staff,manager'])->group(function () {
+    // Only accessible to staff
+    Route::get('/roaster/view', [RoasterController::class, 'viewRoaster'])->name('roaster.view');
+    Route::get('/service/bookings', [ServiceController::class, 'viewBookings'])->name('service.bookings');
+});
 
+Route::middleware(['role:manager'])->group(function () {
+    // Accessible to manager
+    Route::get('/roaster', [RoasterController::class, 'showRoasterForm'])->name('roaster.form');
+    Route::post('/roaster/set', [RoasterController::class, 'setRoaster'])->name('roaster.set');
+    Route::delete('/roaster/{id}', [RoasterController::class, 'destroy'])->name('roaster.destroy');
+});
 
 Route::get('/test', [ProductController::class, 'test']);
-
+Route::view('/unauthorized', 'errors.unauthorized')->name('error.unauthorized');
 
 //auth
 //Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
