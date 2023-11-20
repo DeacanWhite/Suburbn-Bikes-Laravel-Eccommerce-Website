@@ -77,8 +77,8 @@ INSERT INTO users (name, email, password, role) VALUES
 
 
 
-DROP TABLE IF EXISTS roaster;
-CREATE TABLE roaster (
+DROP TABLE IF EXISTS roster;
+CREATE TABLE roster (
      id INT AUTO_INCREMENT PRIMARY KEY,
      user_id INT NOT NULL,
      position ENUM('sale', 'admin', 'workshop') NOT NULL,

@@ -1,17 +1,16 @@
 @extends('layout')
 @include('layouts.navbar')
-<title>Roaster</title>
+<title>Roster</title>
 @section('content')
-    <div class="banner" style="width:100%; position: relative; height: 40vh; margin-top: -40px; background-image: url('https://github.com/Alex11520/img/blob/main/img/service_desktop.jpeg?raw=true'); background-size: cover; background-position: center; border-radius: 1rem;">
+    <div class="banner" style="width:100%; position: relative; height: 25.9375rem; margin-top: 85px; background-image: url('https://github.com/Alex11520/img/blob/main/img/service_desktop.jpeg?raw=true'); background-size: cover; background-position: center;">
         <div style="display: flex; height: 100%; align-items: center; justify-content: center;  ">
-            <p style="color: white; font-size: 20rem; font-weight: bold;">Service</p>
+            <p style="color: white; font-size: 15rem; font-weight: bold;">Create Roster</p>
         </div>
     </div>
 
     {{--    css filter and product card--}}
     <style>
         main {
-            margin-top: -140px;
             position: relative;
             z-index: 2;
             border-radius: 3.125rem 3.125rem 0rem 0rem;
@@ -130,8 +129,8 @@
     </style>
     <main style="margin-bottom: 80px; margin-top: 80px;">
         <div style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
-            <h2 style="text-align: center; color: #333;">Set the roaster</h2>
-            <form action="{{ route('roaster.set') }}" method="post" style="display: flex; flex-direction: column; gap: 10px;">
+            <h2 style="text-align: center; color: #333;">Set the roster</h2>
+            <form action="{{ route('roster.set') }}" method="post" style="display: flex; flex-direction: column; gap: 10px;">
                 @csrf <!-- 确保包含 CSRF 令牌 -->
 
                 <!-- 选择姓名 -->
@@ -170,7 +169,7 @@
         </div>
 
         <div style="max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-            <h1 style="color: #333; text-align: center;">Staff Roaster</h1>
+            <h1 style="color: #333; text-align: center;">Staff roster</h1>
             <table style="width: 100%; border-collapse: collapse;">
                 <thead>
                 <tr style="background-color: #4b5563; color: white; text-align: left;">
@@ -182,13 +181,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($roasters as $roaster)
+                @foreach($rosters as $roster)
                     <tr style="border-bottom: 1px solid #dddddd;">
-                        <td style="padding: 12px 15px;">{{ $roaster->user->name }}</td>
-                        <td style="padding: 12px 15px;">{{ $roaster->position }}</td>
-                        <td style="padding: 12px 15px;">{{ $roaster->day }}</td>
+                        <td style="padding: 12px 15px;">{{ $roster->user->name }}</td>
+                        <td style="padding: 12px 15px;">{{ $roster->position }}</td>
+                        <td style="padding: 12px 15px;">{{ $roster->day }}</td>
                         <td style="padding: 12px 15px;">
-                            <form action="{{ route('roaster.destroy', $roaster->id) }}" method="post">
+                            <form action="{{ route('roster.destroy', $roster->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" onclick="return confirm('Are you sure?')" style="border: none; background-color: #ff0000; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Delete</button>

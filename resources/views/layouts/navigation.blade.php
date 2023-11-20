@@ -21,15 +21,15 @@
                             <x-nav-link href="{{ route('service.bookings') }}">
                                 Bookings
                             </x-nav-link>
-                            <!-- Roaster Table Link -->
-                            <x-nav-link href="{{ route('roaster.view') }}" >
-                                Roaster Table
+                            <!-- roster Table Link -->
+                            <x-nav-link href="{{ route('roster.view') }}" >
+                                Roster Table
                             </x-nav-link>
                         @endif
                         @if(Auth::user()->role === 'manager')
-                            <!-- Roaster Setting Link -->
-                            <x-nav-link href="{{ route('roaster.form') }}">
-                                Roaster Setting
+                            <!-- roster Setting Link -->
+                            <x-nav-link href="{{ route('roster.form') }}">
+                                Roster Settings
                             </x-nav-link>
                         @endif
                     @endauth

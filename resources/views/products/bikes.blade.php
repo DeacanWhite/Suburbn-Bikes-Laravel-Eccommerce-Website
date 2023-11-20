@@ -1,8 +1,7 @@
 @extends('layout')
-@include('layouts.navbar')
 <title>Bikes</title>
 @section('content')
-    <div class="banner" style="width:100%; position: relative; height: 50vh; margin-top: -40px; background-image: url('https://github.com/Alex11520/img/blob/main/img/bike-1.png?raw=true'); background-size: cover; background-position: center; border-radius: 2rem;">
+    <div class="banner" style="width:100%; position: relative; height: 25.9375rem; background-image: url('https://github.com/Alex11520/img/blob/main/img/bike-1.png?raw=true'); background-size: cover; background-position: center; margin-top: 85px">
         <div style="display: flex; height: 100%; align-items: center; justify-content: flex-end; padding-right: 15%; padding-bottom: 5%;">
             <p style="color: white; font-size: 20rem; font-weight: bold;">Bike</p>
         </div>
@@ -11,7 +10,6 @@
 {{--        css filter and product card--}}
     <style>
         main {
-            margin-top: -140px;
             position: relative;
             z-index: 2;
             background: #fff;
@@ -24,7 +22,7 @@
             font-style: normal;
             font-weight: 400;
             line-height: normal;
-            padding-top: 7.06rem;
+            padding-top: 2.56rem;
         }
 
         .category-container {
@@ -33,6 +31,7 @@
             align-items: center;
             gap: 2.5rem;
             margin-top: 3.31rem;
+            margin-bottom: 3.25rem;
         }
 
 
@@ -115,6 +114,7 @@
             font-style: normal;
             font-weight: 700;
             line-height: 1.575rem; /* 180% */
+
         }
 
         .product-buttons select {
@@ -138,9 +138,9 @@
             <div style="margin-top: 2.5rem; margin-bottom: 2.5rem; text-align: center;">
                 <h2 style="font-size: 5rem;  font-weight: 700; margin-bottom: 2.5rem; color: #39393a ">Category</h2>
                 <div class="category-container">
-                    <button onclick="filterBikes('city bike')" style="width: 18rem; height: 10rem; background-color: #F4F4F4; color: #39393a; font-size: 2.25rem; font-weight: 600; border-color: white; border-radius: 0.5rem;">City</button>
-                    <button onclick="filterBikes('road bike')" style="width: 18rem; height: 10rem; background-color: #E8F3E5; color: #39393a; font-size: 2.25rem; font-weight: 600; border-color: white; border-radius: 0.5rem;">Road</button>
-                    <button onclick="filterBikes('mountain bike')" style="width: 18rem; height: 10rem; background-color: #CEE4DA; color: #39393a; font-size: 2.25rem; font-weight: 600; border-color: white; border-radius: 0.5rem;">Mountain</button>
+                    <button onclick="filterBikes('city bike')" style="width: 18rem; height: 10rem; background-color: #F4F4F4; color: #39393a; font-size: 2.25rem; font-weight: 600; border: none; border-radius: 0.5rem; ">City</button>
+                    <button onclick="filterBikes('road bike')" style="width: 18rem; height: 10rem; background-color: #E8F3E5; color: #39393a; font-size: 2.25rem; font-weight: 600; border: none; border-radius: 0.5rem; ">Road</button>
+                    <button onclick="filterBikes('mountain bike')" style="width: 18rem; height: 10rem; background-color: #CEE4DA; color: #39393a; font-size: 2.25rem; font-weight: 600; border: none; border-radius: 0.5rem; ">Mountain</button>
                 </div>
             </div>
         </div>

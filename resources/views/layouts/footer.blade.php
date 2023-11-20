@@ -18,17 +18,17 @@
                 </a>
             </div>
             <div style="position: absolute; top: 68px; right: 556px; text-align: right;">
-                <!-- Roaster Table Link -->
-                <a href="{{ route('roaster.view') }}" style="font-weight: 400; font-size: 16px; line-height: 20px; color: white; text-decoration: none;">
-                    Roaster Table
+                <!-- roster Table Link -->
+                <a href="{{ route('roster.view') }}" style="font-weight: 400; font-size: 16px; line-height: 20px; color: white; text-decoration: none;">
+                    Roster Table
                 </a>
             </div>
         @endif
         @if(Auth::user()->role === 'manager')
             <div style="position: absolute; top: 68px; right: 696px; text-align: right;">
-                <!-- Roaster Setting Link -->
-                <a href="{{ route('roaster.form') }}" style="font-weight: 400; font-size: 16px; line-height: 20px; color: white; text-decoration: none;">
-                    Roaster Setting
+                <!-- roster Setting Link -->
+                <a href="{{ route('roster.form') }}" style="font-weight: 400; font-size: 16px; line-height: 20px; color: white; text-decoration: none;">
+                    Roster Settings
                 </a>
             </div>
         @endif

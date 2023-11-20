@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RoasterController;
+use App\Http\Controllers\rosterController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +35,10 @@ require __DIR__.'/auth.php';
 
 Route::get('/', [ProductController::class, 'home'])->name('home.index');
 
+//routes for map page
+Route::get('/location', function () {
+    return view('map');
+});
 
 //routes for cart
 Route::get('cart', [ProductController::class, 'cart'])->name('cart');
@@ -55,16 +59,16 @@ Route::post('/service/book', [ServiceController::class, 'bookService'])->name('s
 
 // Routes accessible to staff and manager
 Route::middleware(['role:staff,manager'])->group(function () {
-    Route::get('/roaster/view', [RoasterController::class, 'viewRoaster'])->name('roaster.view');
+    Route::get('/roster/view', [rosterController::class, 'viewroster'])->name('roster.view');
     Route::get('/service/bookings', [ServiceController::class, 'viewBookings'])->name('service.bookings');
 });
 
 // Routes accessible only to manager
 Route::middleware(['role:manager'])->group(function () {
     // Accessible to manager
-    Route::get('/roaster', [RoasterController::class, 'showRoasterForm'])->name('roaster.form');
-    Route::post('/roaster/set', [RoasterController::class, 'setRoaster'])->name('roaster.set');
-    Route::delete('/roaster/{id}', [RoasterController::class, 'destroy'])->name('roaster.destroy');
+    Route::get('/roster', [rosterController::class, 'showrosterForm'])->name('roster.form');
+    Route::post('/roster/set', [rosterController::class, 'setroster'])->name('roster.set');
+    Route::delete('/roster/{id}', [rosterController::class, 'destroy'])->name('roster.destroy');
 });
 
 Route::get('/test', [ProductController::class, 'test']);
