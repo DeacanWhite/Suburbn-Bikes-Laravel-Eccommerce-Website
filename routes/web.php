@@ -36,29 +36,30 @@ require __DIR__.'/auth.php';
 Route::get('/', [ProductController::class, 'home'])->name('home.index');
 
 
-//cart
+//routes for cart
 Route::get('cart', [ProductController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{prodNo}', [ProductController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [ProductController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [ProductController::class, 'remove'])->name('remove.from.cart');
 
-//alex
+//routes for product pages
 Route::get('/bikes', [ProductController::class, 'bikes']);
 Route::get('/filter-bikes/{category2}', [ProductController::class, 'filterBikes']);
-
 Route::get('/scooters', [ProductController::class, 'scooters']);
 Route::get('/apparels', [ProductController::class, 'apparels']);
 Route::get('/parts', [ProductController::class, 'parts']);
 
+//routes for service pages
 Route::get('/services', [ServiceController::class, 'showServiceForm'])->name('service.form');
 Route::post('/service/book', [ServiceController::class, 'bookService'])->name('service.book');
 
+// Routes accessible to staff and manager
 Route::middleware(['role:staff,manager'])->group(function () {
-    // Only accessible to staff
     Route::get('/roaster/view', [RoasterController::class, 'viewRoaster'])->name('roaster.view');
     Route::get('/service/bookings', [ServiceController::class, 'viewBookings'])->name('service.bookings');
 });
 
+// Routes accessible only to manager
 Route::middleware(['role:manager'])->group(function () {
     // Accessible to manager
     Route::get('/roaster', [RoasterController::class, 'showRoasterForm'])->name('roaster.form');
@@ -67,6 +68,8 @@ Route::middleware(['role:manager'])->group(function () {
 });
 
 Route::get('/test', [ProductController::class, 'test']);
+
+//Route for error pages
 Route::view('/unauthorized', 'errors.unauthorized')->name('error.unauthorized');
 
 //auth
