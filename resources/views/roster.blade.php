@@ -17,8 +17,6 @@
             background: #fff;
         }
 
-
-
         @media screen and (max-width: 1000px) {
             #category-container button {
                 width: 7.5rem;

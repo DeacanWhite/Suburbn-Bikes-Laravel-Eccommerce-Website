@@ -2,7 +2,16 @@
 @include('layouts.navbar')
 <title>Cart</title>
 @section('content')
-    <table id="cart" class="table table-hover table-condensed" style="width: 70vw; margin-left: auto; margin-right: auto;">
+    <div class="wrapper">
+    <div class="title-breadcrumb" style="margin-top: 122px">
+        <h3>your cart</h3>
+        <ul class="breadcrumb">
+            <li>Cart</li>
+            <li><a href="#">Information</a></li>
+            <li><a href="#">Its Yours!</a></li>
+        </ul>
+    </div>
+    <table id="cart" class="table table-hover table-condensed" style="width: 70vw; margin-left: auto; margin-right: auto; margin-top: 2.44rem">
         <thead>
         <tr>
             <th style="width:50%">Product</th>
@@ -50,6 +59,64 @@
         </tr>
         </tfoot>
     </table>
+</div>
+    <style>
+        .wrapper{
+            margin: 0 auto;
+            max-width: 90.875rem;
+        }
+
+        .breadcrumb{
+            background-color: transparent;
+        }
+
+        .title-breadcrumb h3 {
+            color: #39393A;
+            font-family: Inter;
+            font-size: 2.5625rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 3rem; /* 117.073% */
+            text-transform: uppercase;
+            margin-top: 2.94rem;
+        }
+
+        .title-breadcrumb{
+            padding-left: 40px;
+        }
+
+        /* Style the list */
+        ul.breadcrumb {
+            padding: 1rem 0;
+            list-style: none;
+        }
+
+        /* Display list items side by side */
+        ul.breadcrumb li {
+            display: inline;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Add a slash symbol (/) before/behind each list item */
+        ul.breadcrumb li+li:before {
+            padding: 8px;
+            color: black;
+            content: "/\00a0";
+        }
+
+        /* Add a color to all links inside the list */
+        ul.breadcrumb li a {
+            color: #707070;
+            text-decoration: none;
+        }
+
+        /* Add a color on mouse-over */
+        ul.breadcrumb li a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
 @endsection
 
 @section('scripts')

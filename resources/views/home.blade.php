@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@200&display=swap" rel="stylesheet">
-    <link href="{{ asset('css/home-style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/transition-style.css') }}" rel="stylesheet">
     <style>
         * {
             padding: 0;
@@ -20,6 +20,26 @@
         body {
             font-family: "Inter", sans-serif;
             font-family: "Montserrat", sans-serif;
+        }
+
+
+        body{
+            animation: transitionIn 0.5s;
+        }
+
+        @keyframes transitionIn {
+            from {
+                opacity: 0;
+                transform: rotateX(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotateX(0deg)
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         .navbar {
@@ -266,7 +286,7 @@
             line-height: 8.75rem; /* 93.333% */
         }
 
-        .hero button {
+        .hero a {
             border-radius: 1.25rem;
             background: #b2d3a8;
             display: inline-flex;
@@ -469,7 +489,7 @@
             max-width: 95rem;
         }
 
-        .mid-banner-text button {
+        .mid-banner-text a {
             border-radius: 1.25rem;
             background: #b2d3a8;
             display: inline-flex;
@@ -507,6 +527,52 @@
             font-style: normal;
             font-weight: 700;
             line-height: 2.53125rem; /* 98.78% */
+        }
+
+        .email-signup-banner{
+            width: 100%;
+            height: 35.75rem;
+            background: #ECEEE8;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .email-signup-banner h1{
+            color: #000;
+            text-align: center;
+            font-family: Inter;
+            font-size: 5.5625rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 6.1875rem; /* 111.236% */
+            letter-spacing: -0.225rem;
+            margin-bottom: 5rem;
+        }
+
+        .email-signup-banner p{
+            color: #000;
+            text-align: center;
+            font-family: Inter;
+            font-size: 1.0625rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.6875rem; /* 158.824% */
+            letter-spacing: -0.0225rem;
+            margin-top: 0.97rem;
+        }
+
+        .email-box{
+            display: flex;
+            width: 28.375rem;
+            height: 3rem;
+            padding: 0rem 0.3125rem;
+            justify-content: ;
+            flex-shrink: 0;
+            border-radius: 3.125rem;
+            border: 1px solid #E5E5E5;
+            background: #FFF;
         }
     </style>
 
@@ -604,11 +670,11 @@
     <div class="hero-text-container">
         <h1>READY TO RIDE?</h1>
         <p>Browse our latest selection of bikes and scooters</p>
-        <button onclick="window.location.href='#';">Explore</button>
+        <a id="link" href="#trending-products">Explore</a>
     </div>
 </div>
 <main>
-    <div class="trending-products">
+    <div id="trending-products" class="trending-products">
         <p>POPULAR CATEGORIES & TRENDING PRODUCTS</p>
         <div class="category-container">
             <div class="category">
@@ -666,9 +732,17 @@
     <div class="mid-banner">
         <div class="mid-banner-text">
             <h3>Affordable Servicing, All Year Round </h3>
-            <button onclick="window.location.href='#';">Get Started</button>
+            <a href="{{ url('/services') }}">Get Started</a>
         </div>
     </div>
+    <!--<div class="email-signup-banner">
+        <h1>Don't miss out.</h1>
+        <div class="email-box">
+            <input type="text" placeholder="Enter your email address">
+            <button>Sign Up</button>
+        </div>
+        <p>Sign up to get the latest on new releases and more.</p>
+    </div>-->
 </main>
 @include('layouts.footer')
 <script>
