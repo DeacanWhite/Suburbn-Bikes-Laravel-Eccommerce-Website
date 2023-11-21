@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@200&display=swap" rel="stylesheet">
-    <link href="{{ asset('css/home-style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/transition-style.css') }}" rel="stylesheet">
     <style>
         * {
             padding: 0;
@@ -20,6 +20,26 @@
         body {
             font-family: "Inter", sans-serif;
             font-family: "Montserrat", sans-serif;
+        }
+
+
+        body{
+            animation: transitionIn 0.5s;
+        }
+
+        @keyframes transitionIn {
+            from {
+                opacity: 0;
+                transform: rotateX(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotateX(0deg)
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         .navbar {
@@ -114,9 +134,13 @@
             stroke: white !important;
         }
 
-        .navbar-scrolled .nav-icons path {
+        .navbar-scrolled .nav-icons #map-icon path {
             stroke: black !important;
             fill: black !important;
+        }
+
+        .navbar-scrolled .nav-icons path {
+            stroke: black !important;
         }
 
         .side-bar {
@@ -262,7 +286,7 @@
             line-height: 8.75rem; /* 93.333% */
         }
 
-        .hero button {
+        .hero a {
             border-radius: 1.25rem;
             background: #b2d3a8;
             display: inline-flex;
@@ -465,7 +489,7 @@
             max-width: 95rem;
         }
 
-        .mid-banner-text button {
+        .mid-banner-text a {
             border-radius: 1.25rem;
             background: #b2d3a8;
             display: inline-flex;
@@ -503,6 +527,52 @@
             font-style: normal;
             font-weight: 700;
             line-height: 2.53125rem; /* 98.78% */
+        }
+
+        .email-signup-banner{
+            width: 100%;
+            height: 35.75rem;
+            background: #ECEEE8;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .email-signup-banner h1{
+            color: #000;
+            text-align: center;
+            font-family: Inter;
+            font-size: 5.5625rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 6.1875rem; /* 111.236% */
+            letter-spacing: -0.225rem;
+            margin-bottom: 5rem;
+        }
+
+        .email-signup-banner p{
+            color: #000;
+            text-align: center;
+            font-family: Inter;
+            font-size: 1.0625rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.6875rem; /* 158.824% */
+            letter-spacing: -0.0225rem;
+            margin-top: 0.97rem;
+        }
+
+        .email-box{
+            display: flex;
+            width: 28.375rem;
+            height: 3rem;
+            padding: 0rem 0.3125rem;
+            justify-content: ;
+            flex-shrink: 0;
+            border-radius: 3.125rem;
+            border: 1px solid #E5E5E5;
+            background: #FFF;
         }
     </style>
 
@@ -552,13 +622,12 @@
                             <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
-                        hello there
                     </a></li>
             </ul>
         </div>
         <div class="nav-icons">
             <ul>
-                <li><a href="Map.html">
+                <li><a id="map-icon" href="{{ url('/location') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="23" height="24" viewBox="0 0 23 24" fill="none">
                             <path d="M15.5 9.5C15.5 8.43913 15.0786 7.42172 14.3284 6.67157C13.5783 5.92143 12.5609 5.5 11.5 5.5C10.4391 5.5 9.42172 5.92143 8.67157 6.67157C7.92143 7.42172 7.5 8.43913 7.5 9.5C7.5 10.5609 7.92143 11.5783 8.67157 12.3284C9.42172 13.0786 10.4391 13.5 11.5 13.5C12.5609 13.5 13.5783 13.0786 14.3284 12.3284C15.0786 11.5783 15.5 10.5609 15.5 9.5ZM11.5 7C12.163 7 12.7989 7.26339 13.2678 7.73223C13.7366 8.20107 14 8.83696 14 9.5C14 10.163 13.7366 10.7989 13.2678 11.2678C12.7989 11.7366 12.163 12 11.5 12C10.837 12 10.2011 11.7366 9.73223 11.2678C9.26339 10.7989 9 10.163 9 9.5C9 8.83696 9.26339 8.20107 9.73223 7.73223C10.2011 7.26339 10.837 7 11.5 7Z" fill="white" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M16.9649 15.98C16.9629 15.98 16.9618 15.9777 16.963 15.9761L17.42 15.38C18.3614 14.2238 19.111 12.9239 19.64 11.53C19.87 10.78 20 9.99 20 9.17C20 4.66 16.2 1 11.5 1C6.8 1 3 4.66 3 9.17C3 9.99 3.13 10.79 3.36 11.54C3.61 12.31 4.08 13.22 4.8 14.28L5.17 14.82C5.44 15.19 5.73 15.58 6.05 15.98L6.54 16.6L7.07 17.24L7.65 17.9L8.25 18.6L8.91 19.3L9.61 20.05L10.33 20.81L10.45 20.93L10.71 21.2L11.11 21.6C11.3309 21.8209 11.6891 21.8209 11.91 21.6V21.6L12.67 20.8L13.4 20.04L14.1 19.3L14.43 18.94L15.06 18.24L15.66 17.56L16.2 16.91C16.3 16.81 16.38 16.7 16.47 16.59L16.9668 15.9839C16.9681 15.9824 16.9669 15.98 16.9649 15.98V15.98ZM11.5 2.5C15.42 2.5 18.5 5.54 18.5 9.17C18.5028 9.81535 18.4015 10.4569 18.2 11.07C17.96 11.85 17.35 12.97 16.22 14.47L15.78 15.05L15.3 15.65L15.06 15.95L14.51 16.59L13.94 17.24L13.31 17.94L13 18.28L12.31 19.01L11.59 19.76V19.76C11.5419 19.8134 11.4581 19.8134 11.41 19.76V19.76L10.69 19.01L10.01 18.29L9.37 17.59L8.77 16.92L8.21 16.26C8.04163 16.0614 7.87496 15.8614 7.71 15.66L7.22 15.05C6.92 14.67 6.65 14.3 6.4 13.95L6.04 13.43C5.51867 12.7106 5.09811 11.9233 4.79 11.09C4.59578 10.4686 4.49798 9.82106 4.5 9.17C4.5 5.54 7.58 2.5 11.5 2.5Z" fill="white" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -601,11 +670,11 @@
     <div class="hero-text-container">
         <h1>READY TO RIDE?</h1>
         <p>Browse our latest selection of bikes and scooters</p>
-        <button onclick="window.location.href='#';">Explore</button>
+        <a id="link" href="#trending-products">Explore</a>
     </div>
 </div>
 <main>
-    <div class="trending-products">
+    <div id="trending-products" class="trending-products">
         <p>POPULAR CATEGORIES & TRENDING PRODUCTS</p>
         <div class="category-container">
             <div class="category">
@@ -663,9 +732,17 @@
     <div class="mid-banner">
         <div class="mid-banner-text">
             <h3>Affordable Servicing, All Year Round </h3>
-            <button onclick="window.location.href='#';">Get Started</button>
+            <a href="{{ url('/services') }}">Get Started</a>
         </div>
     </div>
+    <!--<div class="email-signup-banner">
+        <h1>Don't miss out.</h1>
+        <div class="email-box">
+            <input type="text" placeholder="Enter your email address">
+            <button>Sign Up</button>
+        </div>
+        <p>Sign up to get the latest on new releases and more.</p>
+    </div>-->
 </main>
 @include('layouts.footer')
 <script>

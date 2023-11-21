@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->integer('size');
-            $table->string('colour');
-            $table->decimal('price', 8, 2);
-            $table->text('description');
-            $table->integer('stock');
-            $table->string('image');
-            $table->string('type');
+        Schema::create('products', function (Blueprint $table) {
+            $table->id('prodNo');
+            $table->string('category', 30);
+            $table->string('category2', 30)->nullable();
+            $table->string('name', 200);
+            $table->decimal('price', 10, 2)->nullable();
+            $table->string('img', 300)->nullable();
+            $table->text('description')->nullable();
+            $table->integer('size')->nullable();
+            $table->string('color', 255)->nullable();
             $table->timestamps();
         });
     }

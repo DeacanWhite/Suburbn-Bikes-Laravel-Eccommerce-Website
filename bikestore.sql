@@ -46,8 +46,6 @@ CREATE TABLE serviceBooking(
 );
 
 
-
-
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
    id INT AUTO_INCREMENT PRIMARY KEY,
@@ -61,7 +59,6 @@ CREATE TABLE users (
 );
 
 
--- 在实际应用中，您应该在 PHP 中使用 Hash::make('password') 来生成加密后的密码
 INSERT INTO users (name, email, password, role) VALUES
     ('Staff1', 'staff1@example.com', '$2y$12$JEV86i5Z6WO6meKPbpCBTO9h/GvVqX1Q/rQXBpc1pYy7ZYwo.Qdqi', 'staff'),
     ('Staff2', 'staff2@example.com', '$2y$12$JEV86i5Z6WO6meKPbpCBTO9h/GvVqX1Q/rQXBpc1pYy7ZYwo.Qdqi', 'staff'),
@@ -76,9 +73,8 @@ INSERT INTO users (name, email, password, role) VALUES
     ('Manager11', 'manager11@example.com', '$2y$12$JEV86i5Z6WO6meKPbpCBTO9h/GvVqX1Q/rQXBpc1pYy7ZYwo.Qdqi', 'manager');
 
 
-
-DROP TABLE IF EXISTS roaster;
-CREATE TABLE roaster (
+DROP TABLE IF EXISTS roster;
+CREATE TABLE roster (
      id INT AUTO_INCREMENT PRIMARY KEY,
      user_id INT NOT NULL,
      position ENUM('sale', 'admin', 'workshop') NOT NULL,

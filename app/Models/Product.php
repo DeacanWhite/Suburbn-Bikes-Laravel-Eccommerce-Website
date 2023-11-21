@@ -14,4 +14,15 @@ class Product extends Model
     protected $table = 'products';
     protected $primaryKey = 'prodNo';
     public $timestamps = false;
+
+    protected $fillable = [
+        'category',
+        'category2',
+        'name',
+        'price',
+        'img',
+        'description',
+        'size',
+        'color'
+    ];
 }

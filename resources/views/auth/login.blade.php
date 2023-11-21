@@ -2,6 +2,11 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <div class="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 mb-6 ">
+        <h1 class="text-4xl font-bold mb-4">Login</h1>
+        <p>Please enter your e-mail and password</p>
+    </div>
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -39,9 +44,14 @@
                 </a>
             @endif
 
+            <x-secondary-button class="ml-3">
+                <a href="{{ route('register') }}">register</a>
+            </x-secondary-button>
+
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
+
         </div>
     </form>
 </x-guest-layout>

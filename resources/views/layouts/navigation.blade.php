@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('home.index') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
@@ -15,9 +15,26 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @auth
+                        @if(Auth::user()->role === 'staff' || Auth::user()->role === 'manager')
+                            <!-- Bookings Link -->
+                            <x-nav-link href="{{ route('service.bookings') }}">
+                                Bookings
+                            </x-nav-link>
+                            <!-- roster Table Link -->
+                            <x-nav-link href="{{ route('roster.view') }}" >
+                                Roster Table
+                            </x-nav-link>
+                        @endif
+                        @if(Auth::user()->role === 'manager')
+                            <!-- roster Setting Link -->
+                            <x-nav-link href="{{ route('roster.form') }}">
+                                Roster Settings
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
             </div>
-
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
@@ -43,7 +60,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                             onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -89,7 +106,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                                           onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>

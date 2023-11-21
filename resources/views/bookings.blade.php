@@ -152,7 +152,7 @@
         </div>
 
     </main>
-@include('layouts.footer')
+    @include('layouts.footer')
 @endsection
 @section('scripts')
     <script>
@@ -161,4 +161,3 @@
         }
     </script>
 @endsection
-

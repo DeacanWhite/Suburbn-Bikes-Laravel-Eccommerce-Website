@@ -1,4 +1,10 @@
 <x-guest-layout>
+
+    <div class="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 mb-6 ">
+        <h1 class="text-4xl font-bold mb-4">Register</h1>
+        <p>Please enter your name, e-mail and password</p>
+    </div>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

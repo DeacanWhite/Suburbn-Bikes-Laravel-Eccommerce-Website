@@ -2,8 +2,8 @@
 @include('layouts.navbar')
 <title>Bikes</title>
 @section('content')
-    <div class="banner" style="width:100%; position: relative; height: 50vh; margin-top: -40px; background-image: url('https://github.com/Alex11520/img/blob/main/img/bike-1.png?raw=true'); background-size: cover; background-position: center; border-radius: 2rem;">
-        <div style="display: flex; height: 100%; align-items: center; justify-content: flex-end; padding-right: 15%; padding-bottom: 5%;">
+    <div class="banner" style="width:100%; position: relative; height: 45vh;  background-image: url('https://github.com/Alex11520/img/blob/main/img/bike-1.png?raw=true'); background-size: cover; background-position: center; border-radius: 1rem;">
+        <div style="display: flex; height: 100%; align-items: center; justify-content: flex-end; padding-right: 15%; ">
             <p style="color: white; font-size: 20rem; font-weight: bold;">Bike</p>
         </div>
     </div>
@@ -11,7 +11,6 @@
 {{--        css filter and product card--}}
     <style>
         main {
-            margin-top: -140px;
             position: relative;
             z-index: 2;
             background: #fff;

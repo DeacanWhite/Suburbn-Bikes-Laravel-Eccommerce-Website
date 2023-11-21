@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RoasterController;
+use App\Http\Controllers\RosterController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +17,51 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+//
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
+//
+//Route::middleware('auth')->group(function () {
+//    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+//});
+//
+//require __DIR__.'/auth.php';
+//
+//Route::get('/', [ProductController::class, 'home'])->name('home.index');
+//
+//
+////cart
+//Route::get('cart', [ProductController::class, 'cart'])->name('cart');
+//Route::get('add-to-cart/{prodNo}', [ProductController::class, 'addToCart'])->name('add.to.cart');
+//Route::patch('update-cart', [ProductController::class, 'update'])->name('update.cart');
+//Route::delete('remove-from-cart', [ProductController::class, 'remove'])->name('remove.from.cart');
+//
+////alex
+//Route::get('/bikes', [ProductController::class, 'bikes']);
+//Route::get('/filter-bikes/{category2}', [ProductController::class, 'filterBikes']);
+//
+//Route::get('/scooters', [ProductController::class, 'scooters']);
+//Route::get('/apparels', [ProductController::class, 'apparels']);
+//Route::get('/parts', [ProductController::class, 'parts']);
+//
+//Route::get('/services', [ServiceController::class, 'showServiceForm'])->name('service.form');
+//Route::post('/service/book', [ServiceController::class, 'bookService'])->name('service.book');
+//Route::get('/service/bookings', [ServiceController::class, 'viewBookings'])->name('service.bookings');
+//
+//Route::get('/roster', [RosterController::class, 'showRosterForm'])->name('roster.form');
+//Route::get('/roster/view', [RosterController::class, 'viewRoster'])->name('roster.view');
+//Route::post('/roster/set', [RosterController::class, 'setRoster'])->name('roster.set');
+//Route::delete('/roster/{id}', [RosterController::class, 'destroy'])->name('roster.destroy');
+//
+//
+//
+//Route::get('/test', [ProductController::class, 'test']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -35,35 +77,45 @@ require __DIR__.'/auth.php';
 
 Route::get('/', [ProductController::class, 'home'])->name('home.index');
 
+//routes for map page
+Route::get('/location', function () {
+    return view('map');
+});
 
-//cart
+//routes for cart
 Route::get('cart', [ProductController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{prodNo}', [ProductController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [ProductController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [ProductController::class, 'remove'])->name('remove.from.cart');
 
-//alex
+//routes for product pages
 Route::get('/bikes', [ProductController::class, 'bikes']);
 Route::get('/filter-bikes/{category2}', [ProductController::class, 'filterBikes']);
-
 Route::get('/scooters', [ProductController::class, 'scooters']);
 Route::get('/apparels', [ProductController::class, 'apparels']);
 Route::get('/parts', [ProductController::class, 'parts']);
 
+//routes for service pages
 Route::get('/services', [ServiceController::class, 'showServiceForm'])->name('service.form');
 Route::post('/service/book', [ServiceController::class, 'bookService'])->name('service.book');
-Route::get('/service/bookings', [ServiceController::class, 'viewBookings'])->name('service.bookings');
 
-Route::get('/roaster', [RoasterController::class, 'showRoasterForm'])->name('roaster.form');
-Route::get('/roaster/view', [RoasterController::class, 'viewRoaster'])->name('roaster.view');
-Route::post('/roaster/set', [RoasterController::class, 'setRoaster'])->name('roaster.set');
-Route::delete('/roaster/{id}', [RoasterController::class, 'destroy'])->name('roaster.destroy');
+// Routes accessible to staff and manager
+Route::middleware(['role:staff,manager'])->group(function () {
+    Route::get('/roster/view', [RosterController::class, 'viewroster'])->name('roster.view');
+    Route::get('/service/bookings', [ServiceController::class, 'viewBookings'])->name('service.bookings');
+});
 
+// Routes accessible only to manager
+Route::middleware(['role:manager'])->group(function () {
+    // Accessible to manager
+    Route::get('/roster', [RosterController::class, 'showrosterForm'])->name('roster.form');
+    Route::post('/roster/set', [RosterController::class, 'setroster'])->name('roster.set');
+    Route::delete('/roster/{id}', [RosterController::class, 'destroy'])->name('roster.destroy');
+});
 
 Route::get('/test', [ProductController::class, 'test']);
 
+//Route for error pages
+Route::view('/unauthorized', 'errors.unauthorized')->name('error.unauthorized');
 
-//auth
-//Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-//Route::post('login', [AuthController::class, 'login']);
-//Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+

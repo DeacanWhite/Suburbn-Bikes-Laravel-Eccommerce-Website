@@ -2,7 +2,7 @@
 @include('layouts.navbar')
 <title>Part</title>
 @section('content')
-    <div class="banner" style="width:100%; position: relative; height: 40vh; margin-top: -40px; background-image: url('https://github.com/Alex11520/img/blob/main/img/component_desktop.jpg?raw=true'); background-size: cover; background-position: center; border-radius: 1rem;">
+    <div class="banner" style="width:100%; position: relative; height: 25.9375rem; margin-top: 85px; background-image: url('https://github.com/Alex11520/img/blob/main/img/component_desktop.jpg?raw=true'); background-size: cover; background-position: center; ">
         <div style="display: flex; height: 100%; align-items: center; justify-content: center; ">
             <p style="color: white; font-size: 20rem; font-weight: bold;">Part</p>
         </div>
@@ -10,7 +10,7 @@
     {{--    css filter and product card--}}
     <style>
         main {
-            margin-top: -140px;
+
             position: relative;
             z-index: 2;
             border-radius: 3.125rem 3.125rem 0rem 0rem;
@@ -170,4 +170,3 @@
         }
     </script>
 @endsection
-
