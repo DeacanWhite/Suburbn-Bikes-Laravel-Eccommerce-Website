@@ -144,4 +144,4 @@ This project is open-source and available under the [MIT license](LICENSE).
 
 ### Credits
 
-Developed by Suburbn Bikes Team.
+([Deacan](https://github.com/DeacanWhite), [Alex](https://github.com/Alex11520) and [Max](https://github.com/Howard-Moon-man-about-town))
